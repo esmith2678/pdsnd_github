@@ -45,7 +45,7 @@ def get_time_period():
     Returns:
         (str) Time period information.
     '''
-    time_period = input('\nWould you like to filter the data by month (m) and day of the month, day of the week (d), or not at all? Type "none" for no time filter.\n')
+    time_period = input('\nWould you like to filter the data by month (M) and day of the month, day of the week (D), or not at all? Type "none" for no time filter.\n')
 
     time_period = time_period.lower()
 
