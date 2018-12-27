@@ -8,6 +8,10 @@ Project CREATED ON 12/26/2018
 ### Description
 PDSND_GITHUB project demonstrates my ability to use version control and markdown languages.
 
+### Changes Made
+- Created documentation branch
+- Push new branch to remote repo
+
 ### Files used
 - bikeshare.py
   - ** gitignore **
@@ -19,4 +23,4 @@ PDSND_GITHUB project demonstrates my ability to use version control and markdown
 
 
 ### Credits
-*forked from udacity/PDSND_GITHUB* 
+*forked from udacity/PDSND_GITHUB*
