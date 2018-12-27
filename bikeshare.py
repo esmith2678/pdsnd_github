@@ -11,7 +11,7 @@ washington = 'washington.csv'
 
 
 def get_city():
-    '''Asks the user for a city and returns the filename for 
+    '''Asks the user for a city and returns the filename for
     that city's bike share data.
     Args:
         none.
@@ -23,7 +23,7 @@ def get_city():
 
     city = city.lower()
 
-    while True: 
+    while True:
         if city == "ny" or city == "new york":
             print('\nYou chose New York City! We\'re going to explore its bikeshare data\n')
             return new_york_city
@@ -48,7 +48,7 @@ def get_time_period():
 
     time_period = time_period.lower()
 
-    while True: 
+    while True:
         if time_period == 'm' or time_period == "month":
 
             while True:
@@ -62,7 +62,7 @@ def get_time_period():
                 elif filterByDayOfMonth == "yes":
                    print ('\n We are now filtering data by month and day of the month...\n')
                    return 'day_of_month'
-                
+
         if time_period == "d" or time_period == "day":
             print('\n We are now filtering data by day of the week...\n')
             return 'day_of_week'
@@ -90,32 +90,32 @@ def get_month(month_):
 
 def get_day_of_month(df, dayOfMonth_):
     """Asks the user for a month and a day of month, and returns both
-    Args: 
+    Args:
         dayOfMonth_ - the ouput of get_time_period()
         df - the dataframe with all bikedata
     Returns:
         list with Month and day information
     """
     monthAndDay = []
-    
+
     if dayOfMonth_ == "day_of_month":
-        
+
         month = get_month("month")
         monthAndDay.append(month)
 
         maxDayOfMonth = get_max_day_of_month(df, month)
-        
+
         while (True):
 
             promptString = """\n Which day of the month? \n
             Please type your response as an integer between 1 and """
-                            
-            
-            promptString  = promptString + str(maxDayOfMonth) + "\n" 
+
+
+            promptString  = promptString + str(maxDayOfMonth) + "\n"
 
             dayOfMonth = input(promptString)
 
-            try: 
+            try:
 
                 dayOfMonth = int(dayOfMonth)
 
@@ -126,7 +126,7 @@ def get_day_of_month(df, dayOfMonth_):
             except ValueError:
 
                 print("That's not an integer")
-        
+
     else:
         return 'none'
 
@@ -158,11 +158,11 @@ def load_data(city):
     """
     print('\nLoading the data...\n')
     df = pd.read_csv(city)
-    
+
     #add datetime format to permit easy filtering
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
-    #add auxiliary columns to aid filtering 
+    #add auxiliary columns to aid filtering
     #https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.dt.weekday_name.html
     df['day_of_week'] = df['Start Time'].dt.weekday_name
     df['month'] = df['Start Time'].dt.month
@@ -174,7 +174,7 @@ def apply_time_filters(df, time_period, month, dayOfWeek, monthAndDay):
     '''
     Filters the data according to the criteria specified by the user.
     INPUT:
-    df           - city dataframe 
+    df           - city dataframe
     time_period  - string indicating the specified time period (either "month", "day_of_month", or "day_of_week")
     month        - string indicating the month used to filter the data
     dayOfWeek    - string indicating the week day used to filter the data
@@ -195,8 +195,8 @@ def apply_time_filters(df, time_period, month, dayOfWeek, monthAndDay):
 
     #Filter by day of week if required
     if time_period == 'day_of_week':
-        days = ['Monday', 'Tuesday', 
-        'Wednesday', 'Thursday', 
+        days = ['Monday', 'Tuesday',
+        'Wednesday', 'Thursday',
         'Friday', 'Saturday', 'Sunday']
         for d in days:
             if dayOfWeek.capitalize() in d:
@@ -236,7 +236,7 @@ def popular_day(df):
         popular_day - string with name of day with most rides
     '''
     print('\n * What is the most popular day of the week (Monday to Sunday) for bike traveling?')
-    
+
     return df['day_of_week'].value_counts().reset_index()['index'][0]
 
 
@@ -265,7 +265,7 @@ def trip_duration(df):
     df['End Time'] = pd.to_datetime(df['End Time'])
     df['Travel Time'] = df['End Time'] - df['Start Time']
     #sum for total trip time, mean for avg trip time
- 
+
     total_travel_time = np.sum(df['Travel Time'])
 
     totalDays = str(total_travel_time).split()[0]
@@ -286,7 +286,7 @@ def popular_stations(df):
     INPUT:
         df - dataframe returned from apply_time_filters
     OUTPUT:
-        tuple - indicating most popular start and end stations            
+        tuple - indicating most popular start and end stations
     '''
     print("\n* What is the most popular start station?\n")
     start_station = df['Start Station'].value_counts().reset_index()['index'][0]
@@ -317,7 +317,7 @@ def users(df):
         users - pandas series with counts for each user type
     '''
     print('\n* Are users subscribers, customers, or dependents?\n')
-    
+
     return df['User Type'].value_counts()
 
 
@@ -364,7 +364,7 @@ def compute_stat(f, df):
     OUTPUT:
         prints to console, doesn't return a value
     """
-    
+
     start_time = time.time()
     statToCompute = f(df)
     print(statToCompute)
@@ -381,7 +381,7 @@ def get_max_day_of_month(df, month):
     """
     months = {"january": 1, "february": 2, "march": 3, "april":4, "may": 5, "june":6}
     df = df[df["month"] == months[month]]
-    
+
     maxDay = max(df["day_of_month"])
     return maxDay
 
@@ -390,13 +390,13 @@ def display_raw_data(df):
     Displays the data used to compute the stats
     Input:
         the dataframe with all the bikeshare data
-    Returns: 
+    Returns:
        none
     """
 
     #omit auxiliary columns from visualization
     df = df.drop(['month', 'day_of_month'], axis = 1)
-    
+
     rowIndex = 0
 
     seeData = input("\n Would you like to see rows of the data used to compute the stats? Please write 'yes' or 'no' \n").lower()
@@ -410,7 +410,7 @@ def display_raw_data(df):
             print(df[rowIndex: rowIndex + 5])
             rowIndex = rowIndex + 5
 
-        
+
         seeData = input("\n Would you like to see five more rows of the data used to compute the stats? Please write 'yes' or 'no' \n").lower()
 
 def stats():
@@ -434,10 +434,10 @@ def stats():
     df = apply_time_filters(df, time_period, month, day, monthAndDay)
 
     display_raw_data(df)
-    
+
     stat_function_list = [popular_month,
-     popular_day, popular_hour, 
-     trip_duration, popular_trip, 
+     popular_day, popular_hour,
+     trip_duration, popular_trip,
      popular_stations, users, birth_years, gender]
 
     for fun in stat_function_list:
