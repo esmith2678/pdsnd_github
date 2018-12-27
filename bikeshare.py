@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 
-## Filenames
+## Filenames for Data
 ## Move all csv files to the gitignore file to save space on push to remote repo
 chicago = 'chicago.csv'
 new_york_city = 'new_york_city.csv'

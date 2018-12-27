@@ -11,6 +11,8 @@ PDSND_GITHUB project demonstrates my ability to use version control and markdown
 ### Changes Made
 - Created documentation branch
 - Push new branch to remote repo
+- Added type of files to py files
+- Commited to local repo and push to remote repo
 
 ### Files used
 - bikeshare.py
