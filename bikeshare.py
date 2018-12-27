@@ -19,14 +19,14 @@ def get_city():
     Returns:
         (str) Filename for a city's bikeshare data.
     '''
-    city = input('\nHello! Let\'s explore some US bikeshare data!\n'
+    city = input('\nHello! Let\'s Explore some US bikeshare data!\n'
                  '\nWould you like to see data for Chicago (CH), New York (NY), or Washington (WA)?\n')
 
     city = city.lower()
 
     while True:
         if city == "ny" or city == "new york":
-            print('\nYou chose New York City! We\'re going to explore its bikeshare data\n')
+            print('\nYou choose New York City! We\'re going to explore its bikeshare data\n')
             return new_york_city
         if city == "ch" or city == "chicago":
             print('\nYou chose Chicago! We\'re going to explore its bikeshare data\n')
@@ -45,7 +45,7 @@ def get_time_period():
     Returns:
         (str) Time period information.
     '''
-    time_period = input('\nWould you like to filter the data by month (m) and day of the month, day of the week (d), or not at all? Type "none" for no time filter.\n')
+    time_period = input('\nWould you like to filter the data by month (M) and day of the month, day of the week (D), or not at all? Type "none" for no time filter.\n')
 
     time_period = time_period.lower()
 
